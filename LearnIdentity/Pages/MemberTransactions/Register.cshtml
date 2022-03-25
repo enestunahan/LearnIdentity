@@ -1,0 +1,48 @@
+﻿@page
+@model LearnIdentity.Pages.MemberTransactions.RegisterModel
+@{
+}
+<h4>Kullanıcı Kayıt Formu</h4>
+<hr />
+
+<div class="row">
+
+    @if(TempData["result"].ToString() == "true")
+    {
+        <div class="col-md-4 alert-info">
+            Sisteme başarılı bir şekilde kaydınız gerçekleşmiştir
+            Giriş Sayfasıdan sisteme giriş yapabilirsiniz
+        </div>
+    }
+    else
+    {
+          <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Model.UserName" class="control-label"></label>
+                    <input asp-for="Model.UserName" class="form-control"/>
+                    <span asp-validation-for="Model.UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Model.PhoneNumber" class="control-label"></label>
+                    <input asp-for="Model.PhoneNumber" class="form-control"/>
+                    <span asp-validation-for="Model.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                     <label asp-for="Model.Email" class="control-label"></label>
+                    <input asp-for="Model.Email" class="form-control"/>
+                    <span asp-validation-for="Model.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                     <label asp-for="Model.Password" class="control-label"></label>
+                    <input asp-for="Model.Password" class="form-control"/>
+                    <span asp-validation-for="Model.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Üye Oluştur" class="btn btn-primary" />
+                </div>
+            </form>
+         </div>
+    }
+</div>
