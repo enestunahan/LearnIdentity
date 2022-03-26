@@ -33,13 +33,14 @@ namespace LearnIdentity
 
             services.AddIdentity<AppUser, AppRole>(opt =>
             {
+                opt.User.RequireUniqueEmail = true;
                 opt.Password.RequiredLength = 4;
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireDigit = false;
 
-            }).AddPasswordValidator<CustomPasswordValidator>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            }).AddPasswordValidator<CustomPasswordValidator>().AddUserValidator<CustomUserNameValidator>().AddEntityFrameworkStores<AppIdentityDbContext>();
             
             services.AddRazorPages();
         }
