@@ -40,7 +40,8 @@ namespace LearnIdentity
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireDigit = false;
 
-            }).AddPasswordValidator<CustomPasswordValidator>().AddUserValidator<CustomUserNameValidator>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            }).AddPasswordValidator<CustomPasswordValidator>().AddUserValidator<CustomUserNameValidator>().AddErrorDescriber<CustomIdentityErrorDescriber>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>();
             
             services.AddRazorPages();
         }
