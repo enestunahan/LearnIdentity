@@ -1,4 +1,5 @@
 using LearnIdentity.Models;
+using LearnIdentity.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +39,7 @@ namespace LearnIdentity
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireDigit = false;
 
-            }).AddEntityFrameworkStores<AppIdentityDbContext>();
+            }).AddPasswordValidator<CustomPasswordValidator>().AddEntityFrameworkStores<AppIdentityDbContext>();
             
             services.AddRazorPages();
         }
