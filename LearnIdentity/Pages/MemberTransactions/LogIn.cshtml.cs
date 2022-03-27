@@ -2,6 +2,7 @@ using LearnIdentity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -30,17 +31,42 @@ namespace LearnIdentity.Pages.MemberTransactions
                 AppUser user = await _userManager.FindByEmailAsync(model.Email);
                 if(user != null)
                 {
+                    if(await _userManager.IsLockedOutAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty, "Hesabýnýz bir süreliðine kilitlenmiþtir , lütfen daha sonra tekrar deneyiniz");
+                        return Page();
+                    }
+
                     await _signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
-                    {                        
+                    {
+                        await _userManager.ResetAccessFailedCountAsync(user);
+
                         if (TempData["ReturnUrl"] != null)
                         {
                             return Redirect(TempData["ReturnUrl"].ToString());
                         }
                         return Redirect("/MemberTransactions/Index");
                     }
-                    ModelState.AddModelError(string.Empty, "Geçersiz email adresi veya þifre");
+                    else
+                    {
+                        await _userManager.AccessFailedAsync(user);
+
+                        int fail = await _userManager.GetAccessFailedCountAsync(user);
+
+                        ModelState.AddModelError("", $"{fail} kez baþarýsýz giriþ");
+
+                        if(fail == 3)
+                        {
+                            await _userManager.SetLockoutEndDateAsync(user, new System.DateTimeOffset(DateTime.Now.AddMinutes(30)));
+                            ModelState.AddModelError("", "Hesabýnýz 3 baþarýsýz giriþten dolayý 20 dakika süreyle kitlenmiþtir. Lütfen daha sonra tekrar deneyiniz.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Email adresiniz veya þifreniz yanlýþ");
+                        }
+                    }                  
                 }
                 else
                 {
