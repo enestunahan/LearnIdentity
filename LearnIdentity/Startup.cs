@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +33,7 @@ namespace LearnIdentity
                 opt.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
 
-            services.AddIdentity<AppUser, AppRole>(opt =>
+            services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
                 opt.Password.RequiredLength = 4;
@@ -42,7 +43,7 @@ namespace LearnIdentity
                 opt.Password.RequireDigit = false;
 
             }).AddPasswordValidator<CustomPasswordValidator>().AddUserValidator<CustomUserNameValidator>().AddErrorDescriber<CustomIdentityErrorDescriber>()
-            .AddEntityFrameworkStores<AppIdentityDbContext>();
+            .AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
 
             CookieBuilder cookieBuilder = new CookieBuilder();
 

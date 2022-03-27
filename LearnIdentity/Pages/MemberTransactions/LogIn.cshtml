@@ -1,0 +1,29 @@
+﻿@page
+@model LearnIdentity.Pages.MemberTransactions.LogInModel
+@{
+}
+
+<div class ="row">
+    <div class="col-md-4">
+        <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+        <form method="post">
+            <div class="form-group">
+                <label class="control-label" asp-for="Model.Email"></label>
+                <input class = "form-control" asp-for ="Model.Email"/>
+                <span class = "text-danger" asp-validation-for="Model.Email"></span>
+            </div>
+             <div class="form-group">
+                <label class="control-label" asp-for="Model.Password"></label>
+                <input class = "form-control" asp-for ="Model.Password"/>
+                <span class = "text-danger" asp-validation-for="Model.Password"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="Model.RememberMe"></label>
+                <input class="form-control" type="checkbox" asp-for="Model.RememberMe" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Giriş Yap"  class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
