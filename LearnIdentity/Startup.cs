@@ -2,6 +2,7 @@ using LearnIdentity.Models;
 using LearnIdentity.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +43,21 @@ namespace LearnIdentity
 
             }).AddPasswordValidator<CustomPasswordValidator>().AddUserValidator<CustomUserNameValidator>().AddErrorDescriber<CustomIdentityErrorDescriber>()
             .AddEntityFrameworkStores<AppIdentityDbContext>();
+
+            CookieBuilder cookieBuilder = new CookieBuilder();
+
+            cookieBuilder.Name = "LearnIdentity";
+            cookieBuilder.HttpOnly = false;
+            cookieBuilder.SameSite = SameSiteMode.Lax;
+            cookieBuilder.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/MemberTransactions/LogIn";
+                opt.Cookie = cookieBuilder;
+                opt.SlidingExpiration = true;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(60);
+            });
             
             services.AddRazorPages();
         }
