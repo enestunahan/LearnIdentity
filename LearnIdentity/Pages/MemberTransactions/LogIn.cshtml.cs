@@ -47,7 +47,7 @@ namespace LearnIdentity.Pages.MemberTransactions
                         {
                             return Redirect(TempData["ReturnUrl"].ToString());
                         }
-                        return Redirect("/MemberTransactions/Index");
+                        return Redirect("/Member/Index");
                     }
                     else
                     {

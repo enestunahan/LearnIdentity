@@ -1,0 +1,31 @@
+﻿@page
+@model LearnIdentity.Pages.Member.IndexModel
+@{
+    Layout = "Shared/_MemberLayout";
+}
+
+<h3 class="text-center">Kullanıcı Bilgileri</h3>
+<div class="row">
+    <div class="col-sm-3">
+        <img style="width:100%; height:100%" src="~/UserPicture/user.webp" />
+    </div>
+    <div class="col-sm-9">
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Kullanıcı ismi</th>
+                <td>@Model.Model.UserName</td>
+            </tr>
+            <tr>
+                <th>E-posta</th>
+                <td>@Model.Model.Email</td>
+            </tr>
+
+            <h2>Index</h2> 
+            <tr>
+                <th>Telefon no</th>
+                <td>@Model.Model.PhoneNumber</td>
+            </tr>
+        </table>
+    </div>
+</div> 

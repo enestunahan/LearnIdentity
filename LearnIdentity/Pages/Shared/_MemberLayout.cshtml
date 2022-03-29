@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LearnIdentity</title>
+    <title>@ViewData["Title"] - Identity</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">LearnIdentity</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Identity</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,35 +21,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Index">Kullanıcılar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/MemberTransactions/Register">Kayıt Ol</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/MemberTransactions/LogIn">Giriş Yap</a>
-                        </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Member/Index">Üye Sayfa</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+       <div class="row">
+           <div class="col-md-8">
+               @RenderBody()
+           </div>
+           <div class="col-md-4">
+               <h3> Menü </h3>
+               <a class="btn btn-info btn-block" href="/ChangePassword">Şifre Değiştirme</a>
+               <a class="btn btn-info btn-block" href="/EditUser">Bilgi Güncelleme</a>
+               <a class="btn btn-info btn-block" asp-page="UyeSayfa/LogOut">Çıkış Yap</a>
+           </div>
+       </div>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - LearnIdentity - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - Identity - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

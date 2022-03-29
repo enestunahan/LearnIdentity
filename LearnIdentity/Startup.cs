@@ -84,6 +84,8 @@ namespace LearnIdentity
 
             app.UseAuthorization();
 
+            app.UseAuthentication(); 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
