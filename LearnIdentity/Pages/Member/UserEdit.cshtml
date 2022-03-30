@@ -1,0 +1,41 @@
+﻿@page
+@model LearnIdentity.Pages.Member.UserEditModel
+@{
+    Layout = "Shared/_MemberLayout";
+}
+<h2>Bilgi Güncelleme</h2>
+@if (TempData["result"].ToString() == "success")
+{
+    <div class="alert alert-info">
+        <span>Bilgileriniz güncellenmiştir.</span>
+    </div>
+}
+else
+{
+    <div class="row">
+    <div class="col-md-12">
+        <form  method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Model.UserName" class="control-label"></label>
+                <input asp-for="Model.UserName" class="form-control" />
+                <span asp-validation-for="Model.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model.PhoneNumber" class="control-label"></label>
+                <input asp-for="Model.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Model.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model.Email" class="control-label"></label>
+                <input asp-for="Model.Email" class="form-control" />
+                <span asp-validation-for="Model.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div> 
+}
