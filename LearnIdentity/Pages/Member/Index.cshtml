@@ -7,7 +7,7 @@
 <h3 class="text-center">Kullanıcı Bilgileri</h3>
 <div class="row">
     <div class="col-sm-3">
-        <img style="width:100%; height:100%" src="~/UserPicture/user.webp" />
+        <img style="width:100%; height:100%" src="@Model.Model.Picture" />
     </div>
     <div class="col-sm-9">
 
@@ -25,6 +25,18 @@
             <tr>
                 <th>Telefon no</th>
                 <td>@Model.Model.PhoneNumber</td>
+            </tr>
+            <tr>
+                <th>Şehir</th>
+                <td>@Model.Model.City</td>
+            </tr>
+            <tr>
+                <th>Doğum Tarihi</th>
+                <td>@Model.Model.BirthDay</td>
+            </tr>
+            <tr>
+                <th>Cinsiyet</th>
+                <td>@Model.Model.Gender</td>
             </tr>
         </table>
     </div>

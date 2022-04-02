@@ -14,7 +14,7 @@ else
 {
     <div class="row">
     <div class="col-md-12">
-        <form  method="post">
+        <form  method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Model.UserName" class="control-label"></label>
@@ -31,6 +31,29 @@ else
                 <input asp-for="Model.Email" class="form-control" />
                 <span asp-validation-for="Model.Email" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="Model.BirthDay" class="control-label"></label>
+                <input asp-for="Model.BirthDay" class="form-control" />
+                <span asp-validation-for="Model.BirthDay" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Model.City" class="control-label"></label>
+                <input asp-for="Model.City" class="form-control" />
+                <span asp-validation-for="Model.City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Model.Gender" class="control-label"></label>
+                <select class="form-control" asp-for="Model.Gender" asp-items="@Model._genders"></select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Resim</label>
+                <input class="form-control" type="file" name="userPicture" />
+            </div>
+
 
             <div class="form-group">
                 <input type="submit" value="Güncelle" class="btn btn-primary" />

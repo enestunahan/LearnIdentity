@@ -26,11 +26,11 @@ namespace LearnIdentity.Pages.Member
         }
 
 
-        public class UserViewModel
-        {
-            public string Email { get; set; }
-            public string UserName { get; set; }
-            public string PhoneNumber { get; set; }
-        }
+        //public class UserViewModel
+        //{
+        //    public string Email { get; set; }
+        //    public string UserName { get; set; }
+        //    public string PhoneNumber { get; set; }
+        //}
     }
 }
