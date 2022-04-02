@@ -55,6 +55,7 @@ namespace LearnIdentity
             services.ConfigureApplicationCookie(opt =>
             {
                 opt.LoginPath = "/MemberTransactions/LogIn";
+                opt.LogoutPath = "/Member/LogOut";
                 opt.Cookie = cookieBuilder;
                 opt.SlidingExpiration = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(60);
