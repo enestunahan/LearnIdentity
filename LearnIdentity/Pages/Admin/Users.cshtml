@@ -1,0 +1,26 @@
+﻿@page
+@model LearnIdentity.Pages.Admin.UsersModel
+@{
+    Layout = "Shared/_AdminLayout";
+}
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Kullanıcı Adı</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefon Numarası</th>
+    </tr>
+  </thead>
+  <tbody>
+        @foreach(var item in Model._users)
+        {
+               <tr>
+                  <th scope="row">1</th>
+                  <td>@item.UserName</td>
+                  <td>@item.Email</td>
+                  <td>@item.PhoneNumber</td>  
+               </tr>
+        }
+  </tbody>
+</table>

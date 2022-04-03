@@ -10,12 +10,9 @@ namespace LearnIdentity.Pages.Admin
 {
     public class IndexModel : BasePageModelModel
     {
-        public IEnumerable<AppUser> users; 
-        public IndexModel(UserManager<AppUser> userManager) : base(userManager,null,null)
+        public IndexModel() : base(null,null,null)
         {}
-        public async Task OnGet()
-        {
-            users = await _userManager.Users.ToListAsync();
-        }
+        public void OnGet()
+        {}
     }
 }

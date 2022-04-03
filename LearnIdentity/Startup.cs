@@ -59,6 +59,7 @@ namespace LearnIdentity
                 opt.Cookie = cookieBuilder;
                 opt.SlidingExpiration = true;
                 opt.ExpireTimeSpan = TimeSpan.FromDays(60);
+                opt.AccessDeniedPath = new PathString("/Member/AccessDenied");
             });
             
             services.AddRazorPages();
