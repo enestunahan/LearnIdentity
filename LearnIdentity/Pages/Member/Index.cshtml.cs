@@ -7,30 +7,17 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.Member
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModelModel
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
         public UserViewModel Model { get; set; }
-        public IndexModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        public IndexModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) :  base(userManager,null,signInManager)
+        {}
 
-        public async Task<IActionResult> OnGet()
+        public  IActionResult OnGet()
         {
-            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            AppUser user = CurrentUser;
             Model = user.Adapt<UserViewModel>(); //Mapster indir bunu kullanabilmek için
             return Page();
         }
-
-
-        //public class UserViewModel
-        //{
-        //    public string Email { get; set; }
-        //    public string UserName { get; set; }
-        //    public string PhoneNumber { get; set; }
-        //}
     }
 }

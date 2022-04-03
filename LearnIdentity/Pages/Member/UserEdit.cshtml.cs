@@ -13,22 +13,16 @@ using System.IO;
 
 namespace LearnIdentity.Pages.Member
 {
-    public class UserEditModel : PageModel
+    public class UserEditModel : BasePageModelModel
     {
-        private readonly UserManager<AppUser> _userManager;
         public UserViewModel Model { get; set; }
-
-        private readonly SignInManager<AppUser> _signInManager;
         public SelectList _genders { get; set; }
-        public UserEditModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-        public async Task OnGet()
+        public UserEditModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager):  base(userManager,null,signInManager)
+        {}
+        public void OnGet()
         {
             TempData["result"] = "failed";
-            AppUser  user = await _userManager.FindByNameAsync(User.Identity.Name);
+            AppUser user = CurrentUser;
             Model = user.Adapt<UserViewModel>();
             _genders = new SelectList(Enum.GetNames(typeof(Gender)));
         }
@@ -37,7 +31,7 @@ namespace LearnIdentity.Pages.Member
         {
             if (ModelState.IsValid)
             {
-                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                AppUser user = CurrentUser;
 
                 if (userPicture != null && userPicture.Length > 0)
                 {
@@ -71,38 +65,12 @@ namespace LearnIdentity.Pages.Member
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    AddModelError(result);
                     TempData["result"] = "failed";
                 }   
                 
             }
             return Page();
         }
-
-        //public class UserEditViewModel
-        //{
-        //    [Required(ErrorMessage  = "Kullanýcý Adý Alaný Booþ Geçilemez")]
-        //    public string UserName { get; set; }
-        //    [Required(ErrorMessage ="Email alaný gereklidir")]
-        //    [EmailAddress]
-        //    public string Email { get; set; }
-
-        //    [Display(Name ="Telefon Numarasý")]
-        //    public string PhoneNumber { get; set; }
-
-        //    [Display (Name ="Doðum Tarihi")]
-        //    [DataType(DataType.DateTime)]
-        //    public DateTime? BirhtDay { get; set; }
-
-        //    [Display(Name ="Profil Fotoðrafý")]
-        //    public string Picture { get; set; }
-        //    [Display(Name = "Þehir")]
-        //    public string City { get; set; }
-        //    [Display(Name ="Cinsiyet")]
-        //    public Gender Gender { get; set; }
-        //}
     }
 }

@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.MemberTransactions
 {
-    public class ResetPasswordModel : PageModel
+    public class ResetPasswordModel : BasePageModelModel
     {
         public ResetPasswordViewModel Model { get; set; }
-        private readonly UserManager<AppUser> _userManager;
-
-        public ResetPasswordModel(UserManager<AppUser> userManager)
-        {
-            _userManager = userManager;
-        }
+        public ResetPasswordModel(UserManager<AppUser> userManager) : base(userManager,null,null)
+        {}
         public void OnGet(string userId , string token)
         {
             TempData["result"] = "failed";
@@ -40,10 +36,7 @@ namespace LearnIdentity.Pages.MemberTransactions
                 }
                 else
                 {
-                    foreach(IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    AddModelError(result);
                 }
             }
             else

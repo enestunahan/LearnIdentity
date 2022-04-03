@@ -9,14 +9,12 @@ using System.Web;
 
 namespace LearnIdentity.Pages.MemberTransactions
 {
-    public class ForgatPasswordModel : PageModel
+    public class ForgatPasswordModel : BasePageModelModel
     {
         public ForgatPasswordViewModel Model { get; set; }
-        private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _configuration;
-        public ForgatPasswordModel(UserManager<AppUser> userManager, IConfiguration configuration)
+        public ForgatPasswordModel(UserManager<AppUser> userManager, IConfiguration configuration) : base(userManager,null,null)
         {
-            _userManager = userManager;
             _configuration = configuration;
         }
         public void OnGet()

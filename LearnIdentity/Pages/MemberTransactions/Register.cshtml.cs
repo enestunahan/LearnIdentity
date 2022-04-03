@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.MemberTransactions
 {
-    public class RegisterModel : PageModel
+    public class RegisterModel : BasePageModelModel
     {
         public UserRegisterModel Model { get; set; }
-        private readonly UserManager<AppUser> _userManager;
-
-        public RegisterModel(UserManager<AppUser> userManager)
-        {
-            _userManager = userManager;
-        }
+        public RegisterModel(UserManager<AppUser> userManager) : base(userManager,null,null)
+        {}
         public void OnGet()
         {
             TempData["result"] = "false";
@@ -41,10 +37,7 @@ namespace LearnIdentity.Pages.MemberTransactions
             }
             else
             {
-                foreach(IdentityError item in result.Errors)
-                {
-                    ModelState.AddModelError("", item.Description);
-                }
+                AddModelError(result);
                 TempData["result"] = false;
                 return Page();
             }

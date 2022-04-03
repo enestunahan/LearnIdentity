@@ -7,17 +7,11 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.Member
 {
-    public class ChangePasswordModel : PageModel
+    public class ChangePasswordModel : BasePageModelModel
     {
         public PasswordChangeViewModel Model { get; set; }
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
-
-        public ChangePasswordModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        public ChangePasswordModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(userManager,null,signInManager)
+        {}
 
         public void OnGet()
         {
@@ -28,7 +22,7 @@ namespace LearnIdentity.Pages.Member
         {
             if (ModelState.IsValid)
             {
-                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                AppUser user = CurrentUser;
 
                 bool exist = await _userManager.CheckPasswordAsync(user, model.PasswordOld);
 
@@ -44,10 +38,7 @@ namespace LearnIdentity.Pages.Member
                     }
                     else
                     {
-                        foreach(IdentityError error in result.Errors)
-                        {
-                            ModelState.AddModelError(string.Empty,error.Description);
-                        }
+                        AddModelError(result);
                     }
                 }
                 else

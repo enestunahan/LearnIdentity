@@ -8,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.MemberTransactions
 {
-    public class LogInModel : PageModel
+    public class LogInModel : BasePageModelModel
     {
         public LogInViewModel Model { get; set; }
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
 
-        public LogInModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        public LogInModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(userManager,null,signInManager)
+        {}
         public void OnGet(string ReturnUrl)
         {
             TempData["ReturnUrl"] = ReturnUrl;

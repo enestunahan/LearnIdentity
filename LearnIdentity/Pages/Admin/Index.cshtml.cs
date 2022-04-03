@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.Admin
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModelModel
     {
-        private readonly UserManager<AppUser> _userManager;
         public IEnumerable<AppUser> users; 
-        public IndexModel(UserManager<AppUser> userManager)
-        {
-            _userManager = userManager;
-        }
+        public IndexModel(UserManager<AppUser> userManager) : base(userManager,null,null)
+        {}
         public async Task OnGet()
         {
             users = await _userManager.Users.ToListAsync();
