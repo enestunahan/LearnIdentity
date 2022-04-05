@@ -33,7 +33,7 @@ namespace LearnIdentity
                 opt.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
 
-            services.AddIdentity<AppUser, IdentityRole>(opt =>
+            services.AddIdentity<AppUser, AppRole>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
                 opt.Password.RequiredLength = 4;
