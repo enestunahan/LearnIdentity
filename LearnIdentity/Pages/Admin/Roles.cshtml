@@ -10,6 +10,7 @@
     <tr>
         <th>Id</th>
         <th>Rol ismi</th>
+        <th>Rol Sil</th>
     </tr>
 
     @foreach (var item in Model.Roles)
@@ -18,6 +19,11 @@
 
             <th>@item.Id</th>
             <th>@item.Name</th>
+            <th>
+                <form asp-route-id="@item.Id" method="post">
+                    <button class="btn btn-warning" type="submit">sil</button>
+                </form>
+            </th>
         </tr>
 
     }
