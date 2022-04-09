@@ -10,6 +10,7 @@
       <th scope="col">Kullanıcı Adı</th>
       <th scope="col">Email</th>
       <th scope="col">Telefon Numarası</th>
+      <th scope="col">Rol Atama</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
                   <td>@item.UserName</td>
                   <td>@item.Email</td>
                   <td>@item.PhoneNumber</td>  
+                  <td> <a class="btn btn-primary" asp-page = "/Admin/RoleAssign" asp-route-id ="@item.Id">Role Ata</a></td>
                </tr>
         }
   </tbody>

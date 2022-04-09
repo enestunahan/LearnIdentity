@@ -1,0 +1,40 @@
+﻿@page
+@model LearnIdentity.Pages.Admin.RoleAssignModel
+@{
+     Layout = "Shared/_AdminLayout";
+}
+
+
+
+
+<h3>Kullanıcıya Rol Atama @TempData["userName"].ToString()</h3>
+
+<hr />
+
+<form method="post">
+    
+@*
+    @foreach(var item in Model.Model)
+    {
+       <div class="form-check">
+           <input asp-for="@item.Exist" type="checkbox" class="form-check-input">
+           <label asp-for="@item.RoleId" class="form-check-label">@item.RoleName</label>
+
+           <input asp-for="@item.RoleName" type="hidden">
+           <input asp-for="@item.RoleId" type="hidden">
+       </div>
+    }*@
+
+    @for(int i=0 ; i<Model.Model.Count() ; i++)
+    {
+        <div class="form-check">
+            <input asp-for="@Model.Model[i].Exist" class="form-check-input">
+            <label asp-for="@Model.Model[i].RoleId" class="form-check-label">@Model.Model[i].RoleName </label>
+
+            <input asp-for="@Model.Model[i].RoleName" type="hidden" />
+            <input asp-for="@Model.Model[i].RoleId" type="hidden" />
+        </div>
+    }
+
+    <input class="btn btn-success" type="submit" value="Rol ata" />
+</form>
