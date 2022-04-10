@@ -1,5 +1,6 @@
 using LearnIdentity.Models;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LearnIdentity.Pages.Member
 {
+    [Authorize]
     public class IndexModel : BasePageModelModel
     {
         public UserViewModel Model { get; set; }
