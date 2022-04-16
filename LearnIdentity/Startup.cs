@@ -1,5 +1,6 @@
 using LearnIdentity.Models;
 using LearnIdentity.Validations;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,17 @@ namespace LearnIdentity
                 opt.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
 
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("AnkaraPolicy", policy =>
+                {
+                    // value deðeri zorunlu bir deðer deðil policy.RequireClaim("city");
+                    policy.RequireClaim("city", "ankara");
+                });
+            });
+
+
             services.AddIdentity<AppUser, AppRole>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
@@ -61,6 +73,8 @@ namespace LearnIdentity
                 opt.ExpireTimeSpan = TimeSpan.FromDays(60);
                 opt.AccessDeniedPath = new PathString("/Member/AccessDenied");
             });
+
+            services.AddScoped<IClaimsTransformation, ClaimProvider.ClaimProvider>();
             
             services.AddRazorPages();
         }

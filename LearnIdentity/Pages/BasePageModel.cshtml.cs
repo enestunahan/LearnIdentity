@@ -11,7 +11,7 @@ namespace LearnIdentity.Pages
         protected SignInManager<AppUser> _signInManager;    
         protected RoleManager<AppRole> _roleManager;
         protected AppUser CurrentUser => _userManager.FindByNameAsync(User.Identity.Name).Result;
-        
+        //   User arka tarafta ClaimsPrincipal sýnýfýdýr
         public BasePageModelModel(UserManager<AppUser> userManager = null,
             RoleManager<AppRole> roleManager = null,  
             SignInManager<AppUser> signInManager =null)
