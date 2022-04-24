@@ -11,9 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace LearnIdentity
 {
@@ -41,6 +39,12 @@ namespace LearnIdentity
                 {
                     // value deðeri zorunlu bir deðer deðil policy.RequireClaim("city");
                     policy.RequireClaim("city", "ankara");
+                });
+
+
+                opt.AddPolicy("ViolencePolicy", policy =>
+                {
+                    policy.RequireClaim("age");
                 });
             });
 

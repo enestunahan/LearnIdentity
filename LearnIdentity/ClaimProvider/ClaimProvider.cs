@@ -1,6 +1,7 @@
 ﻿using LearnIdentity.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -25,6 +26,18 @@ namespace LearnIdentity.ClaimProvider
 
                 if(user != null)
                 {
+                    if(user.BirthDay != null)
+                    {
+                        var today = DateTime.Today;
+                        var age = today.Year - user.BirthDay?.Year;
+
+                        if(age > 15)
+                        {
+                            Claim violenceClaim = new Claim("age", true.ToString(), ClaimValueTypes.String, "enes");
+                            identity.AddClaim(violenceClaim);
+                        }
+                    }
+
                     if(user.City != null)
                     {
                         if(!principal.HasClaim(x=>x.Type == "City"))
